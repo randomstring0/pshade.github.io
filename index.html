@@ -10,6 +10,36 @@
             font-family: Arial, sans-serif;
             color: #fff;
             overflow-x: hidden;
+            transition: background 0.5s;
+        }
+        body.dark {
+            background: #121212;
+            color: #fff;
+        }
+
+        body.light {
+            background: #f9f9f9;
+            color: #000;
+        }
+
+        body.red {
+            background: #ff4b4b;
+            color: #fff;
+        }
+
+        body.dark button, body.dark nav a {
+            background: #333;
+            color: #fff;
+        }
+
+        body.light button, body.light nav a {
+            background: #ddd;
+            color: #000;
+        }
+
+        body.red button, body.red nav a {
+            background: #ff6666;
+            color: #fff;
         }
         body::before {
             content: "";
@@ -18,29 +48,33 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #4a90e2, #9013fe, #50e3c2);
-            background-size: 400% 400%;
-            animation: backgroundAnimate 15s infinite;
+            background: url('https://source.unsplash.com/1920x1080/?technology,abstract') no-repeat center center/cover;
             z-index: -1;
+            opacity: 0.8;
+            transition: opacity 0.5s;
         }
-
-        @keyframes backgroundAnimate {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         header {
             text-align: center;
             padding: 20px;
             background: rgba(0, 0, 0, 0.7);
+            animation: fadeInDown 2s ease;
         }
 
         header h1 {
             font-size: 3rem;
             margin: 0;
+            animation: pulse 3s infinite;
         }
 
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
         nav {
             display: flex;
             justify-content: center;
@@ -49,30 +83,107 @@
         }
 
         nav a {
-            color: #fff;
+            color: inherit;
             text-decoration: none;
             padding: 10px 20px;
-            border: 2px solid #fff;
+            border: 2px solid currentColor;
             border-radius: 25px;
-            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        nav a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s;
+        }
+
+        nav a:hover::before {
+            left: 0;
         }
 
         nav a:hover {
-            background: #fff;
-            color: #000;
+            transform: scale(1.1);
         }
+
+        nav a span {
+            display: inline-block;
+            animation: textSlide 1s ease forwards;
+        }
+
+        @keyframes textSlide {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .theme-buttons {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .theme-buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .theme-buttons button:hover {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+
+        .dark-mode { background: #333; color: #fff; }
+        .light-mode { background: #ddd; color: #000; }
+        .red-mode { background: #ff4b4b; color: #fff; }
 
         .container {
             max-width: 1200px;
             margin: auto;
             padding: 20px;
+            animation: fadeInUp 2s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .features, .update-log, .about {
             margin: 20px 0;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .features:hover, .update-log:hover, .about:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transform: scale(1.02);
+        }
+
+        .features::after, .update-log::after, .about::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.5s;
+        }
+
+        .features:hover::after, .update-log:hover::after, .about:hover::after {
+            left: 0;
         }
 
         h2 {
@@ -89,18 +200,34 @@
             margin: 5px 0;
         }
 
-        .animated-button {
-            display: inline-block;
+        .script-viewer {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: auto;
+            max-height: 300px;
+        }
+
+        .script-viewer pre {
+            margin: 0;
+        }
+
+        .get-script {
             background: linear-gradient(90deg, #4a90e2, #9013fe);
             color: #fff;
             padding: 10px 20px;
             text-align: center;
             text-decoration: none;
             border-radius: 25px;
+            cursor: pointer;
             transition: background 0.5s, transform 0.2s;
+            display: inline-block;
+            margin-top: 20px;
         }
 
-        .animated-button:hover {
+        .get-script:hover {
             background: linear-gradient(90deg, #50e3c2, #4a90e2);
             transform: scale(1.1);
         }
@@ -116,31 +243,57 @@
 
             nav a {
                 margin: 10px;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .features, .update-log, .about {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+
+            .theme-buttons button {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+
+            .script-viewer {
+                max-height: 200px;
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
-<body>
+<body class="dark">
     <header>
         <h1>PShade Ultimate</h1>
-        <p>The ultimate shader solution for Roblox Executor. - coming soon</p>
+        <p>The ultimate shader solution for Roblox.</p>
     </header>
 
     <nav>
-        <a href="#features">Features</a>
-        <a href="#update-log">Update Log</a>
-        <a href="#about" class="animated-button">About</a>
-        <a href="#Get-Script" class="animated-button">Get Script</a>
+        <a href="#features"><span>Features</span></a>
+        <a href="#update-log"><span>Update Log</span></a>
+        <a href="#about" class="animated-button"><span>About</span></a>
+        <a href="#script" class="animated-button"><span>Get Script</span></a>
     </nav>
+
+    <div class="theme-buttons">
+        <button class="dark-mode" onclick="setTheme('dark')">Dark Mode</button>
+        <button class="light-mode" onclick="setTheme('light')">Light Mode</button>
+        <button class="red-mode" onclick="setTheme('red')">Red Mode</button>
+    </div>
 
     <div class="container">
         <section id="features" class="features">
             <h2>Features</h2>
             <ul>
-                <li>Animated UI</li>
+                <li>HD Visual Enhancements</li>
                 <li>Optimized Performance</li>
                 <li>Customizable Shader Settings</li>
-                <li>No Download needed</li>
+                <li>Easy Installation and Setup</li>
                 <li>Compatible with Most Devices</li>
             </ul>
         </section>
@@ -148,26 +301,79 @@
         <section id="update-log" class="update-log">
             <h2>Update Log</h2>
             <ul>
-                <li>Ultimate Version: Remaking every stuff and adding more features.</li>
+                <li>Version 1.2.0: Added advanced lighting effects.</li>
+                <li>Version 1.1.0: remaking the GUI.</li>
+                <li>Version 1.0.0: remaking every stuff and adding more features.</li>
             </ul>
         </section>
 
         <section id="about" class="about">
             <h2>About PShade Ultimate</h2>
-            <p>PShade Ultimate is designed to enhance your Roblox experience by adding stunning visual effects and customizable shader options, PShade Ultimate offers tools to make your game stand out.</p>
+            <p>PShade Ultimate is designed to enhance your Roblox experience by adding stunning visual effects and customizable shader options.</p>
 
             <h3>What is it for?</h3>
             <p>PShade Ultimate enhances the visual fidelity of your Roblox games, providing realistic lighting, shadows, and vibrant colors.</p>
 
             <h3>How to use it?</h3>
             <p>1. Get a executor.<br>
-               2. copy the code.<br>
-               3. Launch Roblox and paste it into your roblox executor<br>
-               4. Enjoy your experience!</p>
+               2. Copy the script.<br>
+               3. Paste it Into Your executor.<br>
+               4. Enjoy a visually immersive gaming experience!</p>
 
             <h3>Showcase Video</h3>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/example-video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </section>
+
+        <section id="script" class="script">
+            <h2>Get Script</h2>
+            <div class="script-viewer">
+                <pre><code>
+                  print("coming soon")
+                </code></pre>
+            </div>
+            <a class="get-script" onclick="copyScript()">Copy Script</a>
+        </section>
     </div>
+
+    <script>
+        function setTheme(theme) {
+            document.body.className = theme;
+            const buttons = document.querySelectorAll('button, nav a');
+            buttons.forEach(button => {
+                button.className = `${theme}-mode`;
+            });
+        }
+
+        document.querySelectorAll('a, button').forEach(element => {
+            element.addEventListener('click', () => {
+                element.style.animation = 'buttonClick 0.2s';
+                setTimeout(() => {
+                    element.style.animation = '';
+                }, 200);
+            });
+        });
+
+        function copyScript() {
+            const scriptText = `
+            print("coming soon.")
+            `;
+            navigator.clipboard.writeText(scriptText).then(() => {
+                alert('Script copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy script:', err);
+            });
+        }
+
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes buttonClick {
+                0% { transform: scale(1); }
+                50% { transform: scale(0.9); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
