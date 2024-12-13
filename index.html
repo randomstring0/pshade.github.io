@@ -315,7 +315,9 @@ print('coming soon')
         function setTheme(theme) {
             document.body.className = theme;
         }
-
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
         function copyScript() {
             const scriptText = `
 print('coming soon')
