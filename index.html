@@ -174,6 +174,7 @@
             font-family: 'Courier New', Courier, monospace;
             overflow: auto;
             max-height: 300px;
+            user-select: text;
         }
 
         .script-viewer pre {
@@ -293,7 +294,7 @@
                3. Paste it into your executor.<br>
                4. Enjoy a visually immersive gaming experience!</p>
             
-            <h3>Who the creator?</h3>
+            <h3>Who is the creator?</h3>
             <p>pshade was made by content creator on youtube called @im_patrick.</p>
 
             <h3>Showcase Video</h3>
@@ -315,9 +316,7 @@ print('coming soon')
         function setTheme(theme) {
             document.body.className = theme;
         }
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
+
         function copyScript() {
             const scriptText = `
 print('coming soon')
