@@ -11,12 +11,22 @@
             color: #fff;
             overflow-x: hidden;
             transition: background 0.5s;
-        }
-        body.dark {
-            background: #121212;
-            color: #fff;
+            user-select: none;
+            background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
+            background-size: 300% 300%;
+            animation: backgroundShift 10s infinite;
         }
 
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body.dark {
+            color: #fff;
+        }
+        
         body.light {
             background: #f9f9f9;
             color: #000;
@@ -26,33 +36,12 @@
             background: #ff4b4b;
             color: #fff;
         }
-
-        body.dark button, body.dark nav a {
-            background: #333;
-            color: #fff;
-        }
-
-        body.light button, body.light nav a {
-            background: #ddd;
-            color: #000;
-        }
-
+        
         body.red button, body.red nav a {
             background: #ff6666;
             color: #fff;
         }
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://source.unsplash.com/1920x1080/?technology,abstract') no-repeat center center/cover;
-            z-index: -1;
-            opacity: 0.8;
-            transition: opacity 0.5s;
-        }
+
         header {
             text-align: center;
             padding: 20px;
@@ -75,6 +64,7 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
+
         nav {
             display: flex;
             justify-content: center;
@@ -93,34 +83,24 @@
             transition: transform 0.3s, background 0.3s;
         }
 
-        nav a::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s;
-        }
-
-        nav a:hover::before {
-            left: 0;
-        }
-
         nav a:hover {
             transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
         }
 
-        nav a span {
-            display: inline-block;
-            animation: textSlide 1s ease forwards;
+        nav a:hover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.1);
+            animation: hoverGlow 0.5s infinite alternate;
         }
 
-        @keyframes textSlide {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        @keyframes hoverGlow {
+            from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.6); }
+            to { box-shadow: 0 0 20px rgba(255, 255, 255, 1); }
         }
+
         .theme-buttons {
             margin: 20px;
             text-align: center;
@@ -140,10 +120,6 @@
             transform: scale(1.1);
         }
 
-        .dark-mode { background: #333; color: #fff; }
-        .light-mode { background: #ddd; color: #000; }
-        .red-mode { background: #ff4b4b; color: #fff; }
-
         .container {
             max-width: 1200px;
             margin: auto;
@@ -155,6 +131,10 @@
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        .dark-mode { background: #333; color: #fff; }
+        .light-mode { background: #ddd; color: #000; }
+        .red-mode { background: #ff4b4b; color: #fff; }
 
         .features, .update-log, .about {
             margin: 20px 0;
@@ -169,21 +149,6 @@
         .features:hover, .update-log:hover, .about:hover {
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             transform: scale(1.02);
-        }
-
-        .features::after, .update-log::after, .about::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: left 0.5s;
-        }
-
-        .features:hover::after, .update-log:hover::after, .about:hover::after {
-            left: 0;
         }
 
         h2 {
@@ -213,6 +178,11 @@
 
         .script-viewer pre {
             margin: 0;
+            background: #272822;
+            padding: 10px;
+            color: #a6e22e;
+            font-size: 0.9rem;
+            border-radius: 5px;
         }
 
         .get-script {
@@ -231,6 +201,7 @@
         .get-script:hover {
             background: linear-gradient(90deg, #50e3c2, #4a90e2);
             transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(80, 227, 194, 0.8);
         }
 
         @media (max-width: 768px) {
@@ -293,7 +264,7 @@
         <section id="features" class="features">
             <h2>Features</h2>
             <ul>
-                <li>HD Visual Enhancements</li>
+                <li>Easy to use</li>
                 <li>Optimized Performance</li>
                 <li>Customizable Shader Settings</li>
                 <li>Compatible with Most Devices</li>
@@ -317,10 +288,13 @@
             <p>PShade Ultimate enhances the visual fidelity of your Roblox games, providing realistic lighting, shadows, and vibrant colors.</p>
 
             <h3>How to use it?</h3>
-            <p>1. Get a executor.<br>
+            <p>1. Get an executor.<br>
                2. Copy the script.<br>
-               3. Paste it Into Your executor.<br>
+               3. Paste it into your executor.<br>
                4. Enjoy a visually immersive gaming experience!</p>
+            
+            <h3>Who the creator?</h3>
+            <p>pshade was made by content creator on youtube called @im_patrick.</p>
 
             <h3>Showcase Video</h3>
             <iframe width=100% height="315" src="https://www.youtube.com/embed/FSD-Io9dKvY?si=Un7GKQqdxpEt57P_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -329,8 +303,8 @@
         <section id="script" class="script">
             <h2>Get Script</h2>
             <div class="script-viewer">
-                <pre><code>
-                  print("coming soon")
+                <pre><code class="lua">
+print('coming soon')
                 </code></pre>
             </div>
             <a class="get-script" onclick="copyScript()">Copy Script</a>
@@ -340,42 +314,18 @@
     <script>
         function setTheme(theme) {
             document.body.className = theme;
-            const buttons = document.querySelectorAll('button, nav a');
-            buttons.forEach(button => {
-                button.className = `${theme}-mode`;
-            });
         }
-
-        document.querySelectorAll('a, button').forEach(element => {
-            element.addEventListener('click', () => {
-                element.style.animation = 'buttonClick 0.2s';
-                setTimeout(() => {
-                    element.style.animation = '';
-                }, 200);
-            });
-        });
 
         function copyScript() {
             const scriptText = `
-            print("coming soon.")
-            `;
+print('coming soon')
+`;
             navigator.clipboard.writeText(scriptText).then(() => {
                 alert('Script copied to clipboard!');
             }).catch(err => {
                 console.error('Failed to copy script:', err);
             });
         }
-
-
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes buttonClick {
-                0% { transform: scale(1); }
-                50% { transform: scale(0.9); }
-                100% { transform: scale(1); }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
