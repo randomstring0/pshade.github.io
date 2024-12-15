@@ -338,7 +338,8 @@
             <h2>Get Script</h2>
             <div class="script-viewer">
                 <pre><code>
- print("coming soon")
+--pshade ultimate--
+loadstring(game:HttpGet('https://raw.githubusercontent.com/randomstring0/pshade-ultimate/refs/heads/main/src/cd.lua'))()
                 </code></pre>
             </div>
             <a class="get-script" onclick="copyScript()">Copy Script</a>
@@ -365,7 +366,8 @@
 
         function copyScript() {
             const scriptText = `
-            print("coming soon.")
+ --pshade ultimate--
+loadstring(game:HttpGet('https://raw.githubusercontent.com/randomstring0/pshade-ultimate/refs/heads/main/src/cd.lua'))()
             `;
             navigator.clipboard.writeText(scriptText).then(() => {
                 alert('Script copied to clipboard!');
